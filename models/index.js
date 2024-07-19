@@ -1,0 +1,11 @@
+const sequelize = require('../config/config');
+const Ping = require('./ping');  
+const UserOTP = require('./userOTP')
+const UserProfile = require('./userProfile')
+
+const syncDb = async () => {
+  await sequelize.sync({ force: true });
+  console.log('Database synchronized');
+};
+
+module.exports = { sequelize, Ping, syncDb };
