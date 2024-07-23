@@ -1,8 +1,8 @@
 const express = require('express');
-const { ping } = require('../controllers/pingController');
+const { signup } = require('../controllers/signupController');
 
 const router = express.Router();
 
-router.get('/ping', ping);
+router.post('/signup', signup);
 
 module.exports = router;

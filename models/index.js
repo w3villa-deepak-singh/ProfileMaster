@@ -8,4 +8,4 @@ const syncDb = async () => {
   console.log('Database synchronized');
 };
 
-module.exports = { sequelize, Ping, syncDb };
+module.exports = { sequelize, Ping, UserOTP, UserProfile, syncDb };
