@@ -73,11 +73,11 @@ const signup = async (req, res) => {
 
 
     // //    // Send OTP email
-    const confirmationUrl = `http://localhost:3000/api/verify-otp?UID=${newUser.UID}&otp=${otp}`;
-    console.log("confirmtionurlllllllllll",confirmationUrl)
+    // const confirmationUrl = `http://localhost:3000/api/verify-otp?UID=${newUser.UID}&otp=${otp}`;
+    // console.log("confirmtionurlllllllllll",confirmationUrl)
 
         // Send OTP email
-        // await sendConfirmationEmail(email, otp);
+        await sendConfirmationEmail(email, otp, newUser.UID);
     // await sendConfirmationEmail(email, 'Confirm Your Email Address', `Please click the following link to confirm your email address: ${confirmationUrl}`);
 
 

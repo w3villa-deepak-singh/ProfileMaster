@@ -4,7 +4,7 @@ const UserOTP = require('./userOTP')
 const UserProfile = require('./userProfile')
 
 const syncDb = async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync({ force: false });
   console.log('Database synchronized');
 };
 

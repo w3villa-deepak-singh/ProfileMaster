@@ -1,34 +1,41 @@
-const { UserProfile, UserOTP } = require('../models');
+const express = require('express');
+const { UserOTP, UserProfile } = require('../models'); 
+const { sendResponse } = require('../utils/responseHelper');
 
 const verifyOtp = async (req, res) => {
   const { uid, otp } = req.query;
 
+ 
   try {
-    // Find OTP entry with the given UID and OTP
-    const otpEntry = await UserOTP.findOne({ where: { UID: uid, otp } });
+    // Fetch OTP record from database
+    const otpRecord = await UserOTP.findOne({ where: { otp, UID: uid } });
 
-    if (!otpEntry) {
-      return res.status(400).send('Invalid OTP.');
+    if (!otpRecord) {
+      return sendResponse(res, 400, 'Invalid OTP', null);
     }
 
-    // Check if the OTP has expired
-    // if (otpEntry.otpExpiresAt < Math.floor(Date.now() / 1000)) {
-    //   return res.status(400).send('OTP has expired.');
+    // Validate OTP (you can also add additional checks such as expiration)
+    // const currentTime = Math.floor(Date.now() / 1000);
+    // const otpValidityPeriod = 5 * 60; // OTP valid for 5 minutes
+    // if (currentTime - otpRecord.createdAt > otpValidityPeriod) {
+    //   return sendResponse(res, 400, 'OTP has expired', null);
     // }
 
-    // Find the user and activate the account
-    const user = await UserProfile.findOne({ where: { UID: uid } });
-    if (!user) {
-      return res.status(400).send('User not found.');
-    }
+    // If OTP is valid, update user status or perform necessary actions
+    await UserProfile.update(
+      { status: 'ACTIVE' }, // or any other status update required
+      { where: { UID: uid } }
+    );
 
-    user.isActive = true;
-    await user.save();
+    // // Delete OTP record after successful verification
+    // await UserOTP.destroy({ where: { otp, UID: uid } });
 
-    res.send('Email confirmed successfully! Your account is now active.');
+    return sendResponse(res, 200, 'OTP verified successfully', null);
   } catch (error) {
-    res.status(500).send('Internal Server Error');
+    console.error('Error during OTP verification:', error);
+    return sendResponse(res, 500, 'Internal Server Error', null);
   }
+
 };
 
 module.exports = { verifyOtp };

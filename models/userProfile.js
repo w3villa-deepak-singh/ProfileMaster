@@ -54,7 +54,7 @@ const UserProfile = sequelize.define('UserProfile', {
   status: {
     type: DataTypes.ENUM('ACTIVE', 'INACTIVE', 'DISABLE', 'DELETED'),
     allowNull: false,
-    defaultValue: 'ACTIVE',
+    defaultValue: 'INACTIVE',
   },
 
   subscription_type: {

@@ -1,5 +1,5 @@
 const { Ping } = require('../models');
-const sendResponse = require('../utils/responseHelper');
+const {sendResponse} = require('../utils/responseHelper');
 
 const ping = async (req, res) => {
   try {
