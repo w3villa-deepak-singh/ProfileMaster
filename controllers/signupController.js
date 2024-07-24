@@ -12,10 +12,10 @@ const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString(); // Generate a 6-digit OTP
 };
 
-// // Function to send OTP
+
 const sendOTP = async (UID, email) => {
     const otp = generateOTP();
-    const timestamp = Math.floor(Date.now() / 1000); // Current epoch time in seconds
+    const timestamp = Math.floor(Date.now() / 1000); 
   
     // Save OTP to UserOTP table
     await UserOTP.create({

@@ -10,12 +10,12 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendConfirmationEmail = async (to, otp) => {
-  console.log("Sen:",  process.env.EMAIL);
+  console.log("Sender email:",  process.env.EMAIL);
   console.log("Sending email to:", to);
 
   const mailOptions = {
     from: process.env.EMAIL,
-    to,
+    to: to,
     subject: 'Account Confirmation',
     text: `Please confirm your account using the following OTP: ${otp}`,
   };
