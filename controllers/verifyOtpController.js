@@ -22,9 +22,9 @@ const verifyOtp = async (req, res) => {
       return sendResponse(res, 400, 'OTP has expired', null);
     }
 
-    // If OTP is valid, update user status or perform necessary actions
+    // If OTP is valid, update user email verified
     await UserProfile.update(
-      { status: 'ACTIVE' }, // or any other status update required
+      { is_email_verified: true }, 
       { where: { UID: uid } }
     );
 

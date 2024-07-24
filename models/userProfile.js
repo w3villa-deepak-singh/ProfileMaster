@@ -54,8 +54,16 @@ const UserProfile = sequelize.define('UserProfile', {
   status: {
     type: DataTypes.ENUM('ACTIVE', 'INACTIVE', 'DISABLE', 'DELETED'),
     allowNull: false,
-    defaultValue: 'INACTIVE',
+    defaultValue: 'ACTIVE',
   },
+
+
+  is_email_verified: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false, 
+  },
+
 
   subscription_type: {
     type: DataTypes.ENUM('FREE', 'SILVER', 'GOLD'),
