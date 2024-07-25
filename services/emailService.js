@@ -24,7 +24,7 @@ const sendConfirmationEmail = async (to, otp,uid) => {
     html: `
     <div style="font-family: Arial, sans-serif; line-height: 1.5;">
     <p>Or click the button below to confirm your account:</p>
-    <a  href="https://121e-119-82-94-2.ngrok-free.app/api/verify-otp?otp=${otp}&uid=${uid}"
+    <a  href="${process.env.NGROK_URL}/api/verify-otp?otp=${otp}&uid=${uid}"
        style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #007bff; text-align: center; text-decoration: none; border-radius: 5px;">
        Confirm Account
     </a>
