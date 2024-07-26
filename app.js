@@ -4,6 +4,7 @@ const session = require('express-session');
 const passport = require('./config/passport');
 const bodyParser = require('body-parser');
 const { sequelize,syncDb } = require('./models');
+const cors = require('cors');
 
 const pingRoutes = require('./routes/pingRoutes');  
 const signupRoutes = require('./routes/signupRoutes');  
@@ -18,6 +19,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
+
+
+
+app.use(cors({
+  origin: 'http://localhost:3001' 
+}));
 
 
 // Express session
