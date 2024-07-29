@@ -39,7 +39,7 @@ const UserOTP = sequelize.define('UserOTP', {
     allowNull: false,
   },
   
-  
+
 
   createdAt: {
     type: DataTypes.INTEGER(13),
@@ -53,6 +53,7 @@ const UserOTP = sequelize.define('UserOTP', {
     allowNull: false,
     defaultValue: () => Math.floor(Date.now() / 1000),
   },
+ 
 
 });
 

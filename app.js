@@ -10,13 +10,15 @@ const pingRoutes = require('./routes/pingRoutes');
 const signupRoutes = require('./routes/signupRoutes');  
 const verifyOtpRoutes = require('./routes/verifyOtpRoutes');
 const authRoutes = require('./routes/authRoutes');
+const mobileOtpRoutes = require('./routes/mobileOtpRoutes');
+
 
 const errorHandler = require('./middlewares/errorHandler');
 
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
@@ -24,7 +26,8 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: 'http://localhost:3001' 
+  origin: 'http://localhost:3001' ,
+  credentials: true
 }));
 
 
@@ -33,6 +36,7 @@ app.use(session({
   secret: 'feature1234',
   resave: false,
   saveUninitialized: false,
+  cookie: { secure: false }
 }));
 
 
@@ -48,7 +52,9 @@ app.use(passport.session());
 app.use('/api', pingRoutes);  
 app.use('/api', signupRoutes);
 app.use('/api', verifyOtpRoutes);
+app.use('/api', mobileOtpRoutes);
 app.use('/auth', authRoutes);
+
 
 
 

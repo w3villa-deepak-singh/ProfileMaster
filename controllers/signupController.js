@@ -64,7 +64,11 @@ const signup = async (req, res) => {
       createdAt: Math.floor(Date.now() / 1000),
       updatedAt: Math.floor(Date.now() / 1000),
     });
+    
 
+        // Save UID to session
+        req.session.UID = UID;
+        console.log("Saved UID in session:", req.session.UID);
 
      // Send OTP
     //  await sendOTP(newUser.UID, email);

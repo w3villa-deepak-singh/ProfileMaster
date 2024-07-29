@@ -31,9 +31,16 @@ const UserProfile = sequelize.define('UserProfile', {
     unique: true,
   },
 
+
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+
+  mobileNumber: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: null,
   },
 
   address: {
@@ -62,6 +69,12 @@ const UserProfile = sequelize.define('UserProfile', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false, 
+  },
+
+  is_mobile_verified: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
   },
 
 

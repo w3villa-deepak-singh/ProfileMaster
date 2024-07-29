@@ -28,7 +28,7 @@ const verifyOtp = async (req, res) => {
       { where: { UID: uid } }
     );
 
-    // // Delete OTP record after successful verification
+    // Delete OTP record after successful verification
     // await UserOTP.destroy({ where: { otp, UID: uid } });
 
     return sendResponse(res, 200, 'OTP verified successfully', null);
