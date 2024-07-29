@@ -6,11 +6,6 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
 
-
-console.log(`Twilio Account SID: ${accountSid}`);
-console.log(`Twilio Auth Token: ${authToken}`); 
-console.log(`Twilio Phone Number: ${twilioPhoneNumber}`);
-
 const client = new twilio(accountSid, authToken);
 
 const generateOTP = () => {

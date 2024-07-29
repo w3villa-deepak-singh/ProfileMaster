@@ -11,16 +11,6 @@ const UserOTP = sequelize.define('UserOTP', {
     primaryKey: true,
   },
 
-  UID: {
-    type: DataTypes.STRING(36), 
-    allowNull: false,
-    references: {
-      model: UserProfile,
-      key: 'UID',
-    },
-    // onDelete: 'CASCADE',
-    // onUpdate: 'CASCADE',
-  },
 
   email: {
     type: DataTypes.STRING,
@@ -61,6 +51,3 @@ module.exports = UserOTP;
 
 
 
-// Define the association
-UserProfile.hasMany(UserOTP, { foreignKey: 'UID' });
-UserOTP.belongsTo(UserProfile, { foreignKey: 'UID' });
