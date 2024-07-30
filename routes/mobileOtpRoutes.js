@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mobileOtpController = require('../controllers/mobileOtpController');
+const  verifyMobileOtpController  = require('../controllers/verifyMobileOtpController');
+
 
 // Middleware to ensure user is authenticated
 // const authMiddleware = (req, res, next) => {
@@ -14,5 +16,6 @@ const mobileOtpController = require('../controllers/mobileOtpController');
   
 
 router.post('/send-mobile-otp', mobileOtpController.sendMobileOtp);
+router.post('/verify-mobile-otp', verifyMobileOtpController.verifyMobileOtp);
 
 module.exports = router;

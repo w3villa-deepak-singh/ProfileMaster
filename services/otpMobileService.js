@@ -12,12 +12,13 @@ const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString(); 
 };
 
-const sendOTP = async (mobileNumber, mobileOtp) => {
+const sendOTP = async (mobileNumber, otp) => {
+  const formattedNumber = `+91${mobileNumber}`;
   try {
     const message = await client.messages.create({
-      body: `Your OTP code is ${mobileOtp}`,
+      body: `Your OTP code is ${otp}`,
       from: twilioPhoneNumber,
-      to: mobileNumber,
+      to: formattedNumber,
     });
     console.log(`OTP sent successfully to ${mobileNumber}: ${message.sid}`);
     return message.sid;

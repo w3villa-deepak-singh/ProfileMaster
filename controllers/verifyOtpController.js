@@ -31,7 +31,7 @@ const verifyOtp = async (req, res) => {
 
     // Validate OTP (you can also add additional checks such as expiration)
     const currentTime = Math.floor(Date.now() / 1000);
-    const otpValidityPeriod = 2 * 60; 
+    const otpValidityPeriod = 24 * 60 * 60;; 
     console.log(" otpvalidityPeriod:::::: "  ,currentTime - otpRecord.createdAt)
     if (currentTime - otpRecord.createdAt > otpValidityPeriod) {
       return sendResponse(res, 400, 'OTP has expired', null);

@@ -58,6 +58,7 @@ app.use('/auth', authRoutes);
 
 
 
+
 app.use(errorHandler);
 
 const startServer = async () => {
