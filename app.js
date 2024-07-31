@@ -54,6 +54,7 @@ app.use('/api', signupRoutes);
 app.use('/api', verifyOtpRoutes);
 app.use('/api', mobileOtpRoutes);
 app.use('/auth', authRoutes);
+// app.use('/api', loginRoutes); 
 
 
 
