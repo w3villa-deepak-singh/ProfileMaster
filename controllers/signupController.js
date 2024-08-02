@@ -74,13 +74,23 @@ const signup = async (req, res) => {
 
     // Save UID to session
     req.session.UID = UID;
-    console.log("Saved UID in session:", req.session.UID);
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+        return sendResponse(res, 500, 'Internal Server Error', null);
+      }
+      console.log("Saved UID in session:", req.session.UID);
 
     // Send OTP email
-    await sendConfirmationEmail(email, otp);
+    // await sendConfirmationEmail(email, otp);
 
-    sendResponse(res, 201, 'User registered successfully. Please check your email for the OTP.', { UID: newUser.UID, email: newUser.email });
-
+    sendResponse(res, 201, 'User registered successfully. Please check your email for the OTP.', { 
+      UID: newUser.UID, 
+      email: newUser.email , 
+      sessionID: req.sessionID
+    });
+  });
+  
   } catch (error) {
     console.error('Error during signup:', error);
     return sendResponse(res, 500, 'Internal Server Error', null);

@@ -33,12 +33,17 @@ app.use(cors({
 
 // Express session
 app.use(session({
+  key:'uuuid',
   secret: 'feature1234',
-  resave: false,
+  resave: true,
   saveUninitialized: false,
-  cookie: { secure: false }
+  cookie: {
+    secure: false, // Set to true if using HTTPS in production
+    httpOnly: true,
+    sameSite: 'lax', // Adjust this based on your needs
+    signed:false
+  },
 }));
-
 
 // passport middleware
 app.use(passport.initialize());
@@ -57,6 +62,10 @@ app.use('/auth', authRoutes);
 // app.use('/api', loginRoutes); 
 
 
+app.use((req, res, next) => {
+  console.log('Session UID::::::::::::::::::::::', req.session);
+  next();
+});
 
 
 

@@ -9,7 +9,7 @@ const verifyMobileOtp = async (req, res) => {
 
   if (!UID) {
     console.log('User not authenticated. UID is not present in session.');
-    return sendResponse(res, 401, 'User not authenticated', null);
+    return sendResponse(res, 401, 'UID is not present', null);
   }
 
   try {
