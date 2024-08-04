@@ -4,6 +4,7 @@ const { UserProfile } = require('../models');
 const { UserOTP } = require('../models');
 const { sendResponse } = require('../utils/responseHelper');
 const { sendConfirmationEmail } = require('../services/emailService');
+const { jwtAuthMiddleware,generateToken} = require('../jwt')
 
 
 
@@ -53,7 +54,7 @@ const signup = async (req, res) => {
       // If user exists, skip creating the profile
       // Send OTP email to the existing user
       await sendConfirmationEmail(email, otp);
-      return sendResponse(res, 200, 'User already exists. OTP sent again.', { email });
+      return sendResponse(res, 200, 'User already exists. OTP sent again.', { existingUser });
     }
 
     // Hash password
@@ -72,24 +73,23 @@ const signup = async (req, res) => {
       updatedAt: Math.floor(Date.now() / 1000),
     });
 
-    // Save UID to session
-    req.session.UID = UID;
-    req.session.save((err) => {
-      if (err) {
-        console.error('Session save error:', err);
-        return sendResponse(res, 500, 'Internal Server Error', null);
-      }
-      console.log("Saved UID in session:", req.session.UID);
+    const payload = {
+      uid: newUser.UID,
+      email: newUser.email
+  }
+  console.log(JSON.stringify(payload));
+  const token = generateToken(payload);
+  console.log("Token is ::::::::: ", token);
+
 
     // Send OTP email
-    // await sendConfirmationEmail(email, otp);
+    await sendConfirmationEmail(email, otp);
 
     sendResponse(res, 201, 'User registered successfully. Please check your email for the OTP.', { 
-      UID: newUser.UID, 
-      email: newUser.email , 
-      sessionID: req.sessionID
+      newUser:newUser,
+      token:token 
     });
-  });
+
   
   } catch (error) {
     console.error('Error during signup:', error);

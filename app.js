@@ -26,23 +26,27 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: 'http://localhost:3002' ,
-  credentials: true
+  origin: 'http://localhost:3002',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'] 
 }));
 
 
-// Express session
+// // Express session
 app.use(session({
   key:'uuuid',
   secret: 'feature1234',
-  resave: true,
+  resave: false,
   saveUninitialized: false,
-  cookie: {
-    secure: false, // Set to true if using HTTPS in production
-    httpOnly: true,
-    sameSite: 'lax', // Adjust this based on your needs
-    signed:false
-  },
+  // cookie: {
+  //   secure: false, // Set to true if using HTTPS in production
+  //   httpOnly: true,
+  //   sameSite: 'lax', // Adjust this based on your needs
+  //   maxAge: 24 * 60 * 60 * 1000 ,
+  //   path: '/',
+  //   signed:false
+  // },
 }));
 
 // passport middleware
@@ -52,7 +56,27 @@ app.use(passport.session());
 
 
 
+// app.use((req, res, next) => {
+//   console.log('Session ID::::::::::', req.sessionID);
+//   console.log('Session Data:::::::::::', req.session);
+//   console.log('UID in session::::::::::::::::', req.session.UID);
+//   next();
+// });
 
+// Session debugging middleware
+app.use((req, res, next) => {
+  console.log('Session ID at start:', req.sessionID);
+  console.log('Session data at start:', req.session);
+  
+  const oldEnd = res.end;
+  res.end = function(...args) {
+    console.log('Session ID at end:', req.sessionID);
+    console.log('Session data at end:', req.session);
+    oldEnd.apply(this, args);
+  };
+  
+  next();
+});
 
 app.use('/api', pingRoutes);  
 app.use('/api', signupRoutes);
@@ -61,11 +85,6 @@ app.use('/api', mobileOtpRoutes);
 app.use('/auth', authRoutes);
 // app.use('/api', loginRoutes); 
 
-
-app.use((req, res, next) => {
-  console.log('Session UID::::::::::::::::::::::', req.session);
-  next();
-});
 
 
 

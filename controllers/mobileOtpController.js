@@ -4,10 +4,9 @@ const { sendResponse } = require('../utils/responseHelper');
 
 const sendMobileOtp = async (req, res) => {
 
-  const { mobileNumber } = req.body;
-  console.log("mobileNumber::::::::::", mobileNumber)
-  const UID = req.session.UID;
-  console.log('UID from session::::::::::::::::::::::::', UID);
+  const { mobileNumber,UID } = req.body;
+  console.log("mobileNumber::::::::::", mobileNumber);
+  console.log("UID from request body::::::::::", UID);
 
   if (!UID) {
     console.log('User not authenticated. UID is not present in session.');
