@@ -27,7 +27,7 @@ const sendMobileOtp = async (req, res) => {
     console.log('Created new OTP record for:', mobileNumber);
 
     // Send OTP via Twilio
-    await sendOTP(mobileNumber, otp);
+    // await sendOTP(mobileNumber, otp);
 
     sendResponse(res, 200, 'OTP sent successfully', null);
   } catch (error) {

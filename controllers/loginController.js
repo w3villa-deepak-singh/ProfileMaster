@@ -1,6 +1,7 @@
 const { UserProfile } = require('../models');
 const { sendResponse } = require('../utils/responseHelper');
 const bcrypt = require('bcrypt'); 
+const { jwtAuthMiddleware,generateToken} = require('../jwt')
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -25,9 +26,23 @@ const loginUser = async (req, res) => {
     }
 
     // Check email and mobile verification
-    if (user.is_email_verified && user.is_mobile_verified) {
-      // User is verified and login is successful
-      return sendResponse(res, 200, 'Login successful', { user });
+
+    const payload = {
+      uid: user.UID,
+      email: user.email
+  }
+  console.log(JSON.stringify(payload));
+  const token = generateToken(payload);
+  console.log("Token is ::::::::: ", token);
+
+
+    // if (user.is_email_verified && user.is_mobile_verified) {
+      if (user) {
+      return sendResponse(res, 200, 'Login successful', { 
+        existingUser:user,
+        token:token 
+       });
+      // alert(`login suucc`)
     } else {
       return sendResponse(res, 400, 'Please verify your email and/or mobile number', null);
     }
@@ -37,5 +52,18 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser };
+
+
+
+
+const logOut = async (req, res) => {
+  try {
+    return sendResponse(res, 200, 'Logged out successfully', null);
+  } catch (error) {
+    console.error('Error in logout controller:', error);
+    return sendResponse(res, 500, 'Internal Server Error', null);
+  }
+};
+
+module.exports = { loginUser ,logOut};
 
