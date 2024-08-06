@@ -11,7 +11,7 @@ const signupRoutes = require('./routes/signupRoutes');
 const verifyOtpRoutes = require('./routes/verifyOtpRoutes');
 const authRoutes = require('./routes/authRoutes');
 const mobileOtpRoutes = require('./routes/mobileOtpRoutes');
-
+const imgRoutes = require('./routes/imgRoutes');
 
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -83,6 +83,8 @@ app.use('/api', signupRoutes);
 app.use('/api', verifyOtpRoutes);
 app.use('/api', mobileOtpRoutes);
 app.use('/auth', authRoutes);
+app.use('/api', imgRoutes);
+
 // app.use('/api', loginRoutes); 
 
 
