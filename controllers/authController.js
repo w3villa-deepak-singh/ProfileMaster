@@ -23,7 +23,7 @@ const logout = (req, res) => {
 };
 
 // Export the handlers
-module.exports = {
+module.exports = { 
   googleAuth,
   googleCallback,
   authFailure,

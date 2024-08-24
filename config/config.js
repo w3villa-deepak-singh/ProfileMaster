@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 const dbName = 'feature_dashboard'
 const dbUser = 'root'
-const dbPassword = 'password'
+const dbPassword = 'StrongPass123!'
 
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   host: 'localhost',
