@@ -57,7 +57,17 @@ const UserProfile = sequelize.define('UserProfile', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  
+  imgURL: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: null,
+  },
 
+  profession: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   status: {
     type: DataTypes.ENUM('ACTIVE', 'INACTIVE', 'DISABLE', 'DELETED'),
     allowNull: false,
