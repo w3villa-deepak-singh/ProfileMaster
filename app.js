@@ -13,6 +13,7 @@ const authRoutes = require('./routes/authRoutes');
 const mobileOtpRoutes = require('./routes/mobileOtpRoutes');
 const imgRoutes = require('./routes/imgRoutes');
 const userRoutes = require('./routes/userRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -86,6 +87,8 @@ app.use('/api', mobileOtpRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', imgRoutes);
 app.use('/api', userRoutes);
+app.use('/api', paymentRoutes);
+
 
 // app.use('/api', loginRoutes); 
 
