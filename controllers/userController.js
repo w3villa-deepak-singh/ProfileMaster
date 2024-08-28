@@ -5,7 +5,7 @@ const { UserProfile } = require('../models');
 const updateUserProfile = async (req, res) => {
   const { UID } = req.params; 
   console.log("update user data ,UID:::::", UID)
-  const {firstName, lastName, address,city,country, imgURL, profession } = req.body;
+  const {firstName, lastName, address,city,country, profession ,mobileNumber} = req.body;
 
   if (!UID) {
     return res.status(400).json({ message: 'UID is required' });
@@ -13,7 +13,7 @@ const updateUserProfile = async (req, res) => {
 
   try {
     const [updated] = await UserProfile.update(
-      { firstName, lastName, address, city, country, imgURL, profession },
+      { firstName, lastName, address, city, country, profession, mobileNumber },
       { where: { UID }}
     );
       
@@ -42,6 +42,34 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
+const getUserProfile = async (req, res) => {
+  const { UID } = req.params; 
+  console.log("get user data ,UID:::::", UID)
+
+  if (!UID) {
+    return res.status(400).json({ message: 'UID is required' });
+  }
+
+  try {
+        // Find the user profile based on the UID
+    const userProfile = await UserProfile.findOne({ where: { UID } });
+
+      
+        // If the user profile is found, return it
+        if (userProfile) {
+          return res.status(200).json({ message: 'User profile fetched successfully', data: userProfile });
+        }
+       
+           // If no user profile is found, return a 404 response
+    return res.status(404).json({ message: 'User not found' });
+    
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        return res.status(500).json({ message: 'Error fetching user profile', error });
+      }
+};
+
 module.exports = {
-  updateUserProfile
+  updateUserProfile,
+  getUserProfile,
 };
