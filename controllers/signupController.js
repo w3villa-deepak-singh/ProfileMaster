@@ -53,7 +53,7 @@ const signup = async (req, res) => {
     if (existingUser) {
       // If user exists, skip creating the profile
       // Send OTP email to the existing user
-      await sendConfirmationEmail(email, otp);
+      // await sendConfirmationEmail(email, otp);
       return sendResponse(res, 200, 'User already exists. OTP sent again.', { existingUser });
     }
 
