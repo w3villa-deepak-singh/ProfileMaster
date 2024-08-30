@@ -51,7 +51,8 @@ const getUserProfile = async (req, res) => {
   }
 
   try {
-        // Find the user profile based on the UID
+
+    
     const userProfile = await UserProfile.findOne({ where: { UID } });
 
       

@@ -22,10 +22,11 @@ const sendConfirmationEmail = async (to, otp,email) => {
     html: `
     <div style="font-family: Arial, sans-serif; line-height: 1.5;">
     <p>Or click the button below to confirm your account:</p>
-    <a  href="${process.env.NGROK_URL}/api/verify-otp?otp=${otp}&email=${to}"
+    <a  href="${process.env.BACKEND_URL}/api/verify-otp?otp=${otp}&email=${to}"
        style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #007bff; text-align: center; text-decoration: none; border-radius: 5px;">
        Confirm Account
     </a>
+    
   </div>
   `,
   };

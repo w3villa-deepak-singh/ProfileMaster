@@ -2,14 +2,18 @@ const { UserProfile } = require('../models');
 const { UserOTP } = require('../models');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-console.log("frontend Url::::", process.env.FRONTEND_URL);
-console.log("STRIPE_SECRET_KEY ::::", process.env.STRIPE_SECRET_KEY);
+// console.log("frontend Url::::", process.env.FRONTEND_URL);
+// console.log("STRIPE_SECRET_KEY ::::", process.env.STRIPE_SECRET_KEY);
 
 const payment = async (req, res) => {
-  const { title, price, UID } = req.body;
+  const { title, price } = req.body;
+  const UID = req.userPayload.uid; // Extract UID from JWT payload
   console.log('Product received::::::::::', { title, price ,UID});
   try {
-    const lineItems = [
+
+    
+       // Find the user profile based on the UID
+    const lineItems  = [
         {
             price_data: {
                 currency: 'inr',

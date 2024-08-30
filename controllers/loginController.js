@@ -36,8 +36,8 @@ const loginUser = async (req, res) => {
   console.log("Token is ::::::::: ", token);
 
 
-    // if (user.is_email_verified && user.is_mobile_verified) {
-      if (user) {
+    if (user.is_email_verified && user.is_mobile_verified) {
+      // if (user) {
       return sendResponse(res, 200, 'Login successful', { 
         existingUser:user,
         token:token 

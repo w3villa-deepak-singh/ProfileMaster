@@ -1,10 +1,11 @@
 const express = require('express');
-const { payment } = require('../controllers/paymentController');
-
-
 const router = express.Router();
+const { payment } = require('../controllers/paymentController');
+const { jwtAuthMiddleware } = require('../jwt')
 
-router.post('/payment', payment);
+
+
+router.post('/payment',jwtAuthMiddleware, payment);
 
 
 module.exports = router;
