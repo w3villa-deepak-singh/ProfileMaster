@@ -45,7 +45,7 @@ const signup = async (req, res) => {
   try {
 
     // Generate OTP and save to UserOTP table
-    const otp = await sendOTP(email);
+    // const otp = await sendOTP(email);
 
     // Check if user already exists
     const existingUser = await UserProfile.findOne({ where: { email } });
@@ -83,7 +83,7 @@ const signup = async (req, res) => {
 
 
     // Send OTP email
-    await sendConfirmationEmail(email, otp);
+    // await sendConfirmationEmail(email, otp);
 
     sendResponse(res, 201, 'User registered successfully. Please check your email for the OTP.', { 
       newUser:newUser,
