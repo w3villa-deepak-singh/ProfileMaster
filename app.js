@@ -89,7 +89,7 @@ app.use('/auth', authRoutes);
 app.use('/api', imgRoutes);
 app.use('/api', userRoutes);
 app.use('/api', paymentRoutes);
-app.use('/api', courses);
+app.use('/', courses);
 
 
 // app.use('/api', loginRoutes); 
